@@ -1,5 +1,6 @@
 import java.io.FileInputStream
 import java.util.Properties
+import org.gradle.api.tasks.testing.Test
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,6 +11,7 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+val mockitoAgent = configurations.create("mockitoAgent")
 val localProperties = Properties()
 val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
@@ -54,10 +56,20 @@ android {
         compose = true
         buildConfig = true
     }
+    
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+tasks.withType(Test::class.java).configureEach {
+    jvmArgs("-javaagent:${mockitoAgent.asPath}")
 }
 
 dependencies {
@@ -69,13 +81,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // Coroutine
     implementation(libs.kotlinx.coroutines.android)
@@ -117,5 +122,24 @@ dependencies {
     implementation(libs.androidx.room.coroutine)
     implementation(libs.androidx.room.paging)
 
+    // test implementation
+    testImplementation(libs.junit)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    testImplementation(libs.androidx.compose.ui.test)
+    testImplementation(libs.androidx.work.testing)
+    testImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.robolectric)
+    mockitoAgent(libs.mockito.core) { isTransitive = false }
 
 }

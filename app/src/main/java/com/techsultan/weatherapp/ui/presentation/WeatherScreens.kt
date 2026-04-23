@@ -362,12 +362,10 @@ fun CityWeatherItem(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Left — weather icon
             WeatherIconBox(condition = weather.condition ?: "")
 
             Spacer(modifier = Modifier.width(14.dp))
 
-            // Centre — city name + condition + stats
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(

@@ -21,6 +21,12 @@ hilt-compose-navigation = "1.3.0"
 kotlinxCoroutinesAndroid = "1.10.2"
 navigationCompose = "2.9.7"
 loggingInterceptor = "5.1.0"
+mockito = "5.23.0"
+mockito-kotlin = "6.3.0"
+turbine = "1.2.1"
+coroutines-test = "1.10.2"
+androidx-test-core = "1.7.0"
+robolectric = "4.16.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,6 +42,7 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 androidx-material-icon = { group = "androidx.compose.material", name = "material-icons-core" }
@@ -47,6 +54,7 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
 hilt-compose-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-compose-navigation"}
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines-test" }
 
 retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
 square-retrofit-gson = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
@@ -65,6 +73,13 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization"}
 core-splashscreen = {group = "androidx.core", name = "core-splashscreen", version.ref = "core-splash-screen"}
+
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidx-test-core" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
