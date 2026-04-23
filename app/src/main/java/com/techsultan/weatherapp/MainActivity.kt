@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,7 +15,9 @@ import com.techsultan.weatherapp.ui.presentation.WeatherDetailScreen
 import com.techsultan.weatherapp.ui.presentation.WeatherHomeScreen
 import com.techsultan.weatherapp.ui.presentation.WeatherViewModel
 import com.techsultan.weatherapp.ui.theme.WeatherTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WeatherAppNavHost() {
     val navController = rememberNavController()
-    val viewModel: WeatherViewModel = viewModel()
+    val viewModel: WeatherViewModel = hiltViewModel()
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
