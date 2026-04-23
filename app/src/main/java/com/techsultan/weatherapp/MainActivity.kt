@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.techsultan.weatherapp.ui.navigation.WeatherAppNavHost
 import com.techsultan.weatherapp.ui.presentation.WeatherDetailScreen
 import com.techsultan.weatherapp.ui.presentation.WeatherHomeScreen
 import com.techsultan.weatherapp.ui.presentation.WeatherViewModel
@@ -54,34 +55,6 @@ class MainActivity : ComponentActivity() {
             }
         } else {
             NotificationScheduler.schedule(this)
-        }
-    }
-}
-
-@Composable
-fun WeatherAppNavHost() {
-    val navController = rememberNavController()
-    val viewModel: WeatherViewModel = hiltViewModel()
-
-    NavHost(navController = navController, startDestination = "home") {
-        composable("home") {
-            WeatherHomeScreen(
-                viewModel = viewModel,
-                onCityClick = { weather ->
-                    navController.navigate("detail/${weather.cityName}")
-                }
-            )
-        }
-        composable("detail/{cityName}") { backStackEntry ->
-            val cityName = backStackEntry.arguments?.getString("cityName")
-            val weatherList by viewModel.weatherList.collectAsState()
-            val weather = weatherList.find { it.cityName == cityName }
-            if (weather != null) {
-                WeatherDetailScreen(
-                    weather = weather,
-                    onBack = { navController.popBackStack() }
-                )
-            }
         }
     }
 }
