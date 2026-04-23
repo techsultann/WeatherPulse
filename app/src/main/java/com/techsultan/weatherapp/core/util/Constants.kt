@@ -4,6 +4,7 @@ object Constants {
 
     const val NOTIFICATION_CHANNEL_ID   = "weather_hourly"
     const val NOTIFICATION_CHANNEL_NAME = "Hourly Weather"
+    const val NOTIFICATION_ID           = 1001
     const val WORK_TAG                  = "weather_notification_work"
 
     val CITIES = listOf(
