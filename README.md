@@ -2,6 +2,21 @@
 
 A modern, offline-first Android weather application built with Kotlin, Jetpack Compose, and Clean Architecture.
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/img.png" width="30%"  alt=""/>
+  <img src="screenshots/img_1.png" width="30%"  alt=""/>
+</p>
+
+## 📥 Download
+
+You can download the latest version of the app from the [Releases](https://github.com/techsultan/weather-app/releases) section of this repository.
+
+1. Go to the [Releases page](https://github.com/techsultan/weather-app/releases).
+2. Download the `app-release.apk` (or similar) from the latest release.
+3. Install the APK on your Android device.
+
 ## Features
 
 - **Current Weather:** Get real-time weather information for your current location or any city in the world.
