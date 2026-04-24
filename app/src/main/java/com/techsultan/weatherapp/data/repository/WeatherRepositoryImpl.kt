@@ -127,6 +127,18 @@ class WeatherRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun refreshWeather(cities: List<String>) {
+        withContext(ioDispatcher) {
+            if (networkMonitor.isOnline()) {
+                coroutineScope {
+                    cities.map { city ->
+                        launch { fetchAndStore(city) }
+                    }
+                }
+            }
+        }
+    }
+
     private suspend fun fetchAndStore(cityName: String) {
         Log.d(TAG, "fetchAndStore: Fetching for $cityName")
         try {

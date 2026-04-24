@@ -2,7 +2,9 @@ package com.techsultan.weatherapp.ui.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.techsultan.weatherapp.core.util.Constants
 import com.techsultan.weatherapp.domain.WeatherInfo
+import com.techsultan.weatherapp.domain.repository.WeatherRepository
 import com.techsultan.weatherapp.domain.use_case.GetWeatherListUseCase
 import com.techsultan.weatherapp.domain.use_case.SearchCitiesUseCase
 import com.techsultan.weatherapp.domain.use_case.ToggleFavoriteUseCase
@@ -22,11 +24,15 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val getWeatherListUseCase: GetWeatherListUseCase,
     private val searchCitiesUseCase: SearchCitiesUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+    private val repository: WeatherRepository
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
     val weatherList: StateFlow<List<WeatherInfo>> = _searchQuery
         .flatMapLatest { query ->
@@ -51,6 +57,14 @@ class WeatherViewModel @Inject constructor(
             viewModelScope.launch {
                 toggleFavoriteUseCase(it)
             }
+        }
+    }
+
+    fun refreshWeather() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            repository.refreshWeather(Constants.CITIES)
+            _isRefreshing.value = false
         }
     }
 }

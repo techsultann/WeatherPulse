@@ -11,7 +11,7 @@ interface WeatherRepository {
     suspend fun toggleFavorite(cityName: String)
     fun searchCities(query: String): Flow<List<WeatherInfo>>
     suspend fun getCityWeather(cityName: String): WeatherInfo?
-
     suspend fun getGeoCodeCity(query: String, limit: Int): List<GeoLocation>
+    suspend fun refreshWeather(cities: List<String>)
 
 }
